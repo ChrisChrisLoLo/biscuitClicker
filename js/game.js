@@ -27,6 +27,7 @@ function bisEntity(name,yeild,cost,costIncrease){
 			console.log(this.cost);
 			document.getElementById(this.name+"Num").innerHTML = this.amount;
 			console.log(this.name+"Num");
+			document.getElementById(this.name+"Cost").innerHTML = Math.round(this.cost).toLocaleString();
 			//document.getElementById("nim")
 		}
 	}
@@ -44,12 +45,20 @@ var bisEntityArray=[
 	//120000
 ]
 
-//To be migrated to buttonFunc.js----------------
+//array run once at the beggining of the program
+function init(){
+	for (var i=0;i<bisEntityArray.length;i++){
+		console.log("ping");
+		document.getElementById(bisEntityArray[i].name+"Cost").innerHTML = Math.round(bisEntityArray[i].cost).toLocaleString();
+	}
+}
+
 function biscuitClick(){
 	clicks++;
 	console.log(clicks);
 	update();
 }
+
 
 //updates all values. while this is "not efficient", the code is much cleaner and less prone to errors
 function update(){
@@ -70,6 +79,7 @@ function buyEntity(buttonID){
 	calcBisPerSec();
 	update();
 } 
+
 var biscuitPerSec = 0;
 function calcBisPerSec(){
 	biscuitPerSec = 0;
@@ -94,6 +104,8 @@ function printToConsole(string,duration){
 	setTimeout(function(){document.getElementById("console").innerHTML = DEF_MESSAGE;},duration);
 }
 
+
+init();
 //add the biscuits per second to the total clicks every MILLIS_PER_CALL
 setInterval(addBisPerSec,MILLIS_PER_CALL);
 
